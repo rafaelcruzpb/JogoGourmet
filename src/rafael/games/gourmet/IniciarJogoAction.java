@@ -20,7 +20,7 @@ public class IniciarJogoAction implements ActionListener {
 		do {
 			boolean respostaCerta = perguntarPrato(pratoAtual);
 			
-			NodePrato proximoPrato = respostaCerta ? pratoAtual.getOpcaoMesmoTipo() : pratoAtual.getOpcaoOutroTipo();
+			NodePrato proximoPrato = respostaCerta ? pratoAtual.getPratoEsquerda() : pratoAtual.getPratoDireita();
 			
 			if (respostaCerta && proximoPrato == null) {
 				acertar(pratoAtual);

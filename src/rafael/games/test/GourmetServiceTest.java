@@ -13,7 +13,7 @@ class GourmetServiceTest {
 	void preCadastrarPratosTest() {
 		NodePrato prato = GourmetService.preCadastrarPratos();
 		
-		assertEquals(prato.getOpcaoMesmoTipo().getNome(), "lasanha");
+		assertEquals(prato.getPratoEsquerda().getNome(), "lasanha");
 		assertEquals(prato.getOpcaoOutroTipo().getNome(), "bolo de chocolate");
 	}
 	
@@ -24,7 +24,7 @@ class GourmetServiceTest {
 		GourmetService.adicionarNovoPrato(prato, "pimentão", "legume");
 		
 		assertEquals(prato.getOpcaoOutroTipo().getNome(), "legume");
-		assertEquals(prato.getOpcaoOutroTipo().getOpcaoMesmoTipo().getNome(), "pimentão");
+		assertEquals(prato.getOpcaoOutroTipo().getPratoEsquerda().getNome(), "pimentão");
 	}
 
 }
