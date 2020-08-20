@@ -17,14 +17,18 @@ public class Game extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private NodePrato noPrincipal;
+	private NodePrato primeiroPrato;
 	
 	private JLabel titulo;
 	private JButton botaoIniciar;
 
 	public void run() {
-		this.preCadastrarPratos();
-		
+		primeiroPrato = GourmetService.preCadastrarPratos();
+		this.configureFrame();
+	}
+	
+	private void configureFrame()
+	{
 		setSize(300, 100);        
 	    setTitle("Jogo Gourmet");
 	    setLocationRelativeTo(null);
@@ -39,16 +43,8 @@ public class Game extends JFrame {
 	    botaoIniciar = new JButton("OK");
 	    add(titulo, gridBagConstraints);
 	    add(botaoIniciar, gridBagConstraints);
-		
-		IniciarJogoAction startAction = new IniciarJogoAction(noPrincipal);
+	    
+	    IniciarJogoAction startAction = new IniciarJogoAction(primeiroPrato);
 		botaoIniciar.addActionListener(startAction);
-		
-	}
-	
-	private void preCadastrarPratos()
-	{
-		noPrincipal = new NodePrato("massa");
-		noPrincipal.setEsquerda(new NodePrato("lasanha"));
-		noPrincipal.setDireita(new NodePrato("bolo de chocolate"));
 	}
 }

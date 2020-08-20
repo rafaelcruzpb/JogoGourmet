@@ -20,7 +20,7 @@ public class IniciarJogoAction implements ActionListener {
 		do {
 			boolean respostaCerta = perguntarPrato(pratoAtual);
 			
-			NodePrato proximoPrato = respostaCerta ? pratoAtual.getEsquerda() : pratoAtual.getDireita();
+			NodePrato proximoPrato = respostaCerta ? pratoAtual.getOpcaoMesmoTipo() : pratoAtual.getOpcaoOutroTipo();
 			
 			if (respostaCerta && proximoPrato == null) {
 				acertar(pratoAtual);
@@ -79,12 +79,10 @@ public class IniciarJogoAction implements ActionListener {
 			return;
 		}
 		
-		NodePrato novoTipoPrato = new NodePrato(tipoPrato);
-		NodePrato novoPrato = new NodePrato(pratoEscolhido);
-		novoTipoPrato.setEsquerda(novoPrato);
-		
-		prato.setDireita(novoTipoPrato);
+		GourmetService.adicionarNovoPrato(prato, pratoEscolhido, tipoPrato);
 	}
+	
+	
 
 
 }

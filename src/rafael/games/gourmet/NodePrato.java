@@ -2,8 +2,8 @@ package rafael.games.gourmet;
 
 public class NodePrato {
 	private String nome;
-	private NodePrato esquerda;
-	private NodePrato direita;
+	private NodePrato opcaoMesmoTipo;
+	private NodePrato opcaoOutroTipo;
 	
 	public NodePrato(String nome) {
 		super();
@@ -18,19 +18,19 @@ public class NodePrato {
 		this.nome = nome;
 	}
 
-	public NodePrato getEsquerda() {
-		return esquerda;
+	public NodePrato getOpcaoMesmoTipo() {
+		return opcaoMesmoTipo;
 	}
 
-	public void setEsquerda(NodePrato esquerda) {
-		this.esquerda = esquerda;
+	public void setOpcaoMesmoTipo(NodePrato opcaoMesmoTipo) {
+		this.opcaoMesmoTipo = opcaoMesmoTipo;
 	}
 
-	public NodePrato getDireita() {
-		return direita;
+	public NodePrato getOpcaoOutroTipo() {
+		return opcaoOutroTipo;
 	}
 
-	public void setDireita(NodePrato direita) {
-		this.direita = direita;
+	public void setOpcaoOutroTipo(NodePrato opcaoOutroTipo) {
+		this.opcaoOutroTipo = opcaoOutroTipo;
 	}
 }
