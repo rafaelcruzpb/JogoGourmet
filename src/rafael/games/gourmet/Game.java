@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
 /**
  * 
@@ -29,6 +30,7 @@ public class Game extends JFrame {
 	    setLocationRelativeTo(null);
 	    setVisible(true);
 	    setLayout(new GridBagLayout());
+	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	    
 	    GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	    gridBagConstraints.gridx = 0;
