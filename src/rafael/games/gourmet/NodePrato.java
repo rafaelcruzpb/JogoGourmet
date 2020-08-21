@@ -38,6 +38,7 @@ public class NodePrato {
 	}
 
 	public void setPratoEsquerda(NodePrato pratoEsquerda) {
+		pratoEsquerda.setPratoAnterior(this);
 		this.pratoEsquerda = pratoEsquerda;
 	}
 
@@ -46,6 +47,7 @@ public class NodePrato {
 	}
 
 	public void setPratoDireita(NodePrato pratoDireita) {
+		pratoDireita.setPratoAnterior(this);
 		this.pratoDireita = pratoDireita;
 	}
 }

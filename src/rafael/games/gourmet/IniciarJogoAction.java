@@ -57,8 +57,6 @@ public class IniciarJogoAction implements ActionListener {
 	{
 		String pratoEscolhido = JOptionPane.showInputDialog("Qual prato você pensou?");
 		
-		String tipoPrato = JOptionPane.showInputDialog(pratoEscolhido + " é _______ mas " + prato.getNome() + " não.");
-		
 		if (pratoEscolhido == null || pratoEscolhido.equals("")) {
 			JOptionPane.showMessageDialog(
 					null, 
@@ -68,6 +66,8 @@ public class IniciarJogoAction implements ActionListener {
 			);
 			return;
 		}
+		
+		String tipoPrato = JOptionPane.showInputDialog(pratoEscolhido + " é _______ mas " + prato.getNome() + " não.");
 		
 		if (tipoPrato == null || tipoPrato.equals("")) {
 			JOptionPane.showMessageDialog(
@@ -79,7 +79,13 @@ public class IniciarJogoAction implements ActionListener {
 			return;
 		}
 		
-		GourmetService.adicionarNovoPrato(prato, pratoEscolhido, tipoPrato);
+		/**
+		 * Buscar o prato anterior e inserir o novo prato no meio após ele (antes do ultimo)
+		 */
+		NodePrato novoTipoPrato = GourmetService.adicionarPratoEsquerda(prato.getPratoAnterior(), tipoPrato);
+		GourmetService.adicionarPratoEsquerda(novoTipoPrato, pratoEscolhido);
+		novoTipoPrato.setPratoDireita(prato);
+		
 	}
 	
 	

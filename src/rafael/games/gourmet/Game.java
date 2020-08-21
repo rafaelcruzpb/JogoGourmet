@@ -29,7 +29,7 @@ public class Game extends JFrame {
 	
 	private void configureFrame()
 	{
-		setSize(300, 100);        
+		setSize(300, 130);        
 	    setTitle("Jogo Gourmet");
 	    setLocationRelativeTo(null);
 	    setVisible(true);

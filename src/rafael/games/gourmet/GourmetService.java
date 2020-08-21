@@ -5,37 +5,23 @@ public class GourmetService {
 	public static NodePrato preCadastrarPratos()
 	{
 		NodePrato primeiroPrato = new NodePrato("massa");
-		NodePrato segundoPrato = new NodePrato("lasanha");
-		primeiroPrato.setPratoEsquerda();
-		segundoPrato.setPratoAnterior(primeiroPrato);
-		
-		primeiroPrato.setPratoEsquerda(segundoPrato);
-		primeiroPrato.setPratoDireita(new NodePrato("bolo de chocolate"));
+		adicionarPratoEsquerda(primeiroPrato, "lasanha");
+		adicionarPratoDireita(primeiroPrato, "bolo de chocolate");
 		
 		return primeiroPrato;
 	}
 	
-	public static NodePrato criarNovoPrato(String nomePrato, String tipoPrato)
+	public static NodePrato adicionarPratoEsquerda(NodePrato pratoBase, String nomeNovoPrato)
 	{
-		NodePrato novoTipoPrato = new NodePrato(tipoPrato);
-		NodePrato novoPrato = new NodePrato(nomePrato);
-		novoTipoPrato.setPratoEsquerda(novoPrato);
-		
-		return novoTipoPrato;
+		NodePrato novoPrato = new NodePrato(nomeNovoPrato);
+		pratoBase.setPratoEsquerda(novoPrato);
+		return novoPrato;
 	}
 	
-	public static void adicionarNovoPrato(NodePrato pratoBase, String nomePrato, String tipoPrato)
+	public static NodePrato adicionarPratoDireita(NodePrato pratoBase, String nomeNovoPrato)
 	{
-		NodePrato novoTipoPrato = criarNovoPrato(nomePrato, tipoPrato);
-		
-		/**
-		 * Inserindo novos pratos antes do ultimo prato
-		 */
-		if (pratoBase.getPratoAnterior() != null) {
-			novoTipoPrato.setPratoAnterior(pratoBase.getPratoAnterior());
-			pratoBase.getPratoAnterior().setPratoDireita(novoTipoPrato);
-		}
-		
-		pratoBase.setPratoAnterior(novoTipoPrato);
+		NodePrato novoPrato = new NodePrato(nomeNovoPrato);
+		pratoBase.setPratoDireita(novoPrato);
+		return novoPrato;
 	}
 }
