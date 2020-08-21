@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 /**
@@ -29,7 +30,11 @@ public class Game extends JFrame {
 	
 	private void configureFrame()
 	{
-		setSize(300, 130);        
+		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+		UIManager.put("OptionPane.yesButtonText", "Sim");
+		UIManager.put("OptionPane.noButtonText", "Não");
+		UIManager.put("OptionPane.okButtonText", "OK");
+		setSize(300, 120);
 	    setTitle("Jogo Gourmet");
 	    setLocationRelativeTo(null);
 	    setLayout(new GridBagLayout());
