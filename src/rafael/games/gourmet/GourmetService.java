@@ -5,23 +5,36 @@ public class GourmetService {
 	public static NodePrato preCadastrarPratos()
 	{
 		NodePrato primeiroPrato = new NodePrato("massa");
-		adicionarPratoEsquerda(primeiroPrato, "lasanha");
-		adicionarPratoDireita(primeiroPrato, "bolo de chocolate");
+		NodePrato segundoPrato = new NodePrato("bolo de chocolate");
+		primeiroPrato.setPratoDireita(segundoPrato);
+		primeiroPrato.setPratoEsquerda(new NodePrato("lasanha"));
 		
 		return primeiroPrato;
 	}
 	
-	public static NodePrato adicionarPratoEsquerda(NodePrato pratoBase, String nomeNovoPrato)
+	public static NodePrato adicionarPratoEspecifico(NodePrato pratoBase, String nomeNovoPratoEspecifico)
 	{
-		NodePrato novoPrato = new NodePrato(nomeNovoPrato);
-		pratoBase.setPratoEsquerda(novoPrato);
-		return novoPrato;
+		NodePrato novoPratoEspecifico = new NodePrato(nomeNovoPratoEspecifico);
+		pratoBase.setPratoEsquerda(novoPratoEspecifico);
+		
+		return novoPratoEspecifico;
 	}
 	
-	public static NodePrato adicionarPratoDireita(NodePrato pratoBase, String nomeNovoPrato)
+	public static NodePrato adicionarPratoNoAnterior(NodePrato pratoBase, String nomeNovoPrato)
 	{
 		NodePrato novoPrato = new NodePrato(nomeNovoPrato);
-		pratoBase.setPratoDireita(novoPrato);
+		
+		/**
+		 * Descobrir qual sentido o nó veio, para setar o ponteiro correto do nó anterior
+		 */
+		if (pratoBase.getPratoAnterior().getPratoEsquerda().equals(pratoBase)) {
+			pratoBase.getPratoAnterior().setPratoEsquerda(novoPrato);
+		} else {
+			pratoBase.getPratoAnterior().setPratoDireita(novoPrato);
+		}
+		
+		novoPrato.setPratoDireita(pratoBase);
+		
 		return novoPrato;
 	}
 }

@@ -32,7 +32,6 @@ public class Game extends JFrame {
 		setSize(300, 130);        
 	    setTitle("Jogo Gourmet");
 	    setLocationRelativeTo(null);
-	    setVisible(true);
 	    setLayout(new GridBagLayout());
 	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	    
@@ -46,5 +45,6 @@ public class Game extends JFrame {
 	    
 	    IniciarJogoAction startAction = new IniciarJogoAction(primeiroPrato);
 		botaoIniciar.addActionListener(startAction);
+		setVisible(true);
 	}
 }

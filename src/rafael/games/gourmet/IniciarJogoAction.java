@@ -17,23 +17,31 @@ public class IniciarJogoAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		NodePrato pratoAtual = primeiroPrato;
 		
-		do {
-			boolean respostaCerta = perguntarPrato(pratoAtual);
-			
-			NodePrato proximoPrato = respostaCerta ? pratoAtual.getPratoEsquerda() : pratoAtual.getPratoDireita();
-			
-			if (respostaCerta && proximoPrato == null) {
-				acertar(pratoAtual);
-			}
-			
-			if (!respostaCerta && proximoPrato == null) {
-				desistir(pratoAtual);
-			}
-			
-			pratoAtual = proximoPrato;
-			
-		} while (pratoAtual != null);
-		
+		try {
+			do {
+				boolean respostaCerta = perguntarPrato(pratoAtual);
+				
+				NodePrato proximoPrato = respostaCerta ? pratoAtual.getPratoEsquerda() : pratoAtual.getPratoDireita();
+				
+				if (respostaCerta && proximoPrato == null) {
+					acertar(pratoAtual);
+				}
+				
+				if (!respostaCerta && proximoPrato == null) {
+					desistir(pratoAtual);
+				}
+				
+				pratoAtual = proximoPrato;
+				
+			} while (pratoAtual != null);
+		} catch(Exception exception) {
+			JOptionPane.showMessageDialog(
+					null, 
+					exception.getMessage(), 
+					"Erro!", 
+					JOptionPane.ERROR_MESSAGE
+			);
+		}
 	}
 	
 	private boolean perguntarPrato(NodePrato prato)
@@ -53,38 +61,22 @@ public class IniciarJogoAction implements ActionListener {
 		JOptionPane.showMessageDialog(null, "Acertei de novo!");
 	}
 	
-	private void desistir(NodePrato prato)
+	private void desistir(NodePrato prato) throws Exception
 	{
 		String pratoEscolhido = JOptionPane.showInputDialog("Qual prato você pensou?");
 		
 		if (pratoEscolhido == null || pratoEscolhido.equals("")) {
-			JOptionPane.showMessageDialog(
-					null, 
-					"É necessário informar o prato que você pensou!", 
-					"Erro!", 
-					JOptionPane.ERROR_MESSAGE
-			);
-			return;
+			throw new Exception("É necessário informar o prato que você pensou!");
 		}
 		
 		String tipoPrato = JOptionPane.showInputDialog(pratoEscolhido + " é _______ mas " + prato.getNome() + " não.");
 		
 		if (tipoPrato == null || tipoPrato.equals("")) {
-			JOptionPane.showMessageDialog(
-					null, 
-					"É necessário informar o tipo de prato de " + pratoEscolhido + "!", 
-					"Erro!", 
-					JOptionPane.ERROR_MESSAGE
-			);
-			return;
+			throw new Exception("É necessário informar o tipo de prato de " + pratoEscolhido + "!");
 		}
 		
-		/**
-		 * Buscar o prato anterior e inserir o novo prato no meio após ele (antes do ultimo)
-		 */
-		NodePrato novoTipoPrato = GourmetService.adicionarPratoEsquerda(prato.getPratoAnterior(), tipoPrato);
-		GourmetService.adicionarPratoEsquerda(novoTipoPrato, pratoEscolhido);
-		novoTipoPrato.setPratoDireita(prato);
+		NodePrato novoTipoPrato = GourmetService.adicionarPratoNoAnterior(prato, tipoPrato);
+		GourmetService.adicionarPratoEspecifico(novoTipoPrato, pratoEscolhido);
 		
 	}
 	
