@@ -13,18 +13,26 @@ class GourmetServiceTest {
 	void preCadastrarPratosTest() {
 		NodePrato prato = GourmetService.preCadastrarPratos();
 		
-//		assertEquals(prato.getPratoEsquerda().getNome(), "lasanha");
-//		assertEquals(prato.getOpcaoOutroTipo().getNome(), "bolo de chocolate");
+		assertEquals(prato.getPratoEsquerda().getNome(), "lasanha");
+		assertEquals(prato.getPratoDireita().getNome(), "bolo de chocolate");
 	}
 	
 	@Test
-	void adicionarNovoPratoTest() {
-		NodePrato prato = new NodePrato("Hortaliças");
-//		prato.setOpcaoMesmoTipo(new NodePrato("alface"));
-//		GourmetService.adicionarNovoPrato(prato, "pimentão", "legume");
-//		
-//		assertEquals(prato.getOpcaoOutroTipo().getNome(), "legume");
-//		assertEquals(prato.getOpcaoOutroTipo().getPratoEsquerda().getNome(), "pimentão");
+	void adicionarPratoNoAnteriorTest() {
+		NodePrato prato = GourmetService.preCadastrarPratos();
+		
+		GourmetService.adicionarPratoNoAnterior(prato.getPratoDireita(), "novoPrato");
+		
+		assertEquals(prato.getPratoDireita().getNome(), "novoPrato");
+	}
+	
+	@Test
+	void adicionarPratoEspecificoTest() {
+		NodePrato prato = GourmetService.preCadastrarPratos();
+		
+		GourmetService.adicionarPratoEspecifico(prato.getPratoEsquerda(), "outra lasanha");
+		
+		assertEquals(prato.getPratoEsquerda().getPratoEsquerda().getNome(), "outra lasanha");
 	}
 
 }
